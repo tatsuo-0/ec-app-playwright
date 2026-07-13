@@ -1,19 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures/auth.fixture';
 import { Header } from './pages/Header';
-import { ProductsPage } from './pages/ProductsPage';
 import { CartPage } from './pages/CartPage';
-
 
 test.describe('Cart追加機能', () => {
 
-  test('商品を追加できること（iPhone）', async ({ page }) => {
+  test('商品を追加できること（iPhone）', async ({ page, productsPage }) => {
     const header = new Header(page);
-    const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
 
-    await productsPage.open();
-    await page.getByTestId('password').fill('aaa');
-    await page.getByTestId('login-button').click();
     await expect(productsPage.title).toBeVisible();
 
     await test.step('カートの空確認' , async() => {
@@ -44,14 +38,10 @@ test.describe('Cart追加機能', () => {
     });
   });
 
-  test('商品を追加できること（MacBook）', async ({ page }) => {
+  test('商品を追加できること（MacBook）', async ({ page, productsPage }) => {
     const header = new Header(page);
-    const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
 
-    await productsPage.open();
-    await page.getByTestId('password').fill('aaa');
-    await page.getByTestId('login-button').click();
     await expect(productsPage.title).toBeVisible();
 
     await test.step('カートの空確認' , async() => {
@@ -78,14 +68,10 @@ test.describe('Cart追加機能', () => {
     });
   });
 
-  test('商品を追加できること（AirPods）', async ({ page }) => {
+  test('商品を追加できること（AirPods）', async ({ page, productsPage }) => {
     const header = new Header(page);
-    const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
 
-    await productsPage.open();
-    await page.getByTestId('password').fill('aaa');
-    await page.getByTestId('login-button').click();
     await expect(productsPage.title).toBeVisible();
 
     await test.step('カートの空確認' , async() => {
@@ -112,14 +98,10 @@ test.describe('Cart追加機能', () => {
     });
   });
 
-  test('同一商品を追加できること', async ({ page }) => {
+  test('同一商品を追加できること', async ({ page, productsPage }) => {
     const header = new Header(page);
-    const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
 
-    await productsPage.open();
-    await page.getByTestId('password').fill('aaa');
-    await page.getByTestId('login-button').click();
     await expect(productsPage.title).toBeVisible();
 
     await test.step('カートの空確認' , async() => {

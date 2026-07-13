@@ -14,7 +14,7 @@ export class Header{
         this.shopButton = this.page.getByRole('navigation').getByRole('link', { name: 'Shop' });
         this.productsButton = this.page.getByRole('navigation').getByRole('link', { name: 'Products' });
         this.cartButton = this.page.getByRole('navigation').getByRole('link', { name: 'Cart' });
-        this.logoutButton = this.page.getByRole('navigation').getByRole('link', { name: 'Logout' });
+        this.logoutButton = this.page.getByRole('navigation').getByRole('button', { name: 'Logout' });
     }
 
     // shopボタンの押下

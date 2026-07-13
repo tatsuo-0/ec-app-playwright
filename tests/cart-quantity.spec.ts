@@ -1,18 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures/auth.fixture';
 import { Header } from './pages/Header';
-import { ProductsPage } from './pages/ProductsPage';
 import { CartPage } from './pages/CartPage';
 
 test.describe('Cart増減機能', () => {
 
-  test('商品の量を変更できること', async ({ page }) => {
+  test('商品の量を変更できること', async ({ page, productsPage }) => {
     const header = new Header(page);
-    const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
     
-    await productsPage.open();
-    await page.getByTestId('password').fill('aaa');
-    await page.getByTestId('login-button').click();
     await expect(productsPage.title).toBeVisible();
 
     await test.step('カートの空確認' , async() => {
