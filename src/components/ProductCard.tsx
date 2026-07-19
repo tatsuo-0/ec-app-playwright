@@ -1,10 +1,5 @@
 import { Link } from "react-router-dom";
-
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-};
+import { type Product } from "../api/fakeApi";
 
 export default function ProductCard({
   product,
@@ -30,8 +25,12 @@ export default function ProductCard({
         Add to cart
       </button>
 
-      <Link to="/cart" className="btn btn-outline-secondary w-100" data-testid="cart-link">
+      <Link to="/cart" className="btn btn-outline-secondary w-100 mb-2" data-testid="cart-link">
         Cart
+      </Link>
+
+      <Link to={`/products/${product.id}`} className="btn btn-outline-secondary w-100" data-testid={`products-detail-link-${product.id}`}>
+        ProductDetail
       </Link>
     </div>
   );

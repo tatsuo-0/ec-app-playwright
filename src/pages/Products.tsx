@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../api/fakeApi";
+import { getProducts , type Product } from "../api/fakeApi";
 import ProductCard from "../components/ProductCard";
 import { addToCart } from "../store/cartStore";
-
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-};
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
