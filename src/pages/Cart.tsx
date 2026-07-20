@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { getCart, removeFromCart, decreaseQuantity, increaseQuantity } from "../store/cartStore";
+import { placeOrder } from "../store/orderStore";
 
 export default function Cart() {
   const [cart, setCart] = useState(getCart());
+  const [justOrdered, setJustOrdered] = useState(false);
 
   const handleRemove = (id: number) => {
     removeFromCart(id);
@@ -19,15 +21,27 @@ export default function Cart() {
     setCart(getCart());
   };
 
+  const handlePlaceOrder = () => {
+    placeOrder();
+    setCart(getCart());
+    setJustOrdered(true);
+  }
   if (cart.length === 0) {
     return (
       <div className="container mt-5 text-center">
-        <p data-testid="empty-cart" className="text-muted">
-          Cart is empty
-        </p>
+        {justOrdered ? (
+          <p data-testid="order-complete" className="text-success">
+            ご注文ありがとうございました
+          </p>
+        ) : (
+          <p data-testid="empty-cart" className="text-muted">
+            Cart is empty
+          </p>
+        )}
       </div>
     );
   }
+
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -76,6 +90,13 @@ export default function Cart() {
 
       <div className="text-end">
         <h4 data-testid="total-price">Total: ¥{total}</h4>
+        <button
+          className="btn btn-success mt-2"
+          data-testid="place-order"
+          onClick={handlePlaceOrder}
+        >
+          注文する
+        </button>
       </div>
     </div>
   );

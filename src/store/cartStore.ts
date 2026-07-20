@@ -4,7 +4,7 @@ type Product = {
   price: number;
 };
 
-type CartItem = Product & { quantity: number };
+export type  CartItem = Product & { quantity: number };
 
 const CART_KEY = "cart";
 
