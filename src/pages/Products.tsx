@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProducts , type Product } from "../api/fakeApi";
+import { getProducts, type Product } from "../api/fakeApi";
 import ProductCard from "../components/ProductCard";
 import { addToCart } from "../store/cartStore";
 
@@ -8,6 +8,7 @@ export default function Products() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState<string | null>(null); // トーストメッセージ
   const [showToast, setShowToast] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     getProducts().then((data) => {
@@ -41,6 +42,10 @@ export default function Products() {
     setShowToast(true);
   };
 
+  const filteredProducts = products.filter((p) =>
+    p.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="container mt-5 position-relative">
       <h1 className="mb-4" data-testid="page-title">
@@ -59,13 +64,26 @@ export default function Products() {
         </div>
       )}
 
-      <div className="row g-4">
-        {products.map((p) => (
-          <div key={p.id} className="col-12 col-md-4 d-flex">
-            <ProductCard product={p} onAdd={() => handleAddToCart(p)} />
-          </div>
-        ))}
-      </div>
+      <input
+        type="text"
+        className="form-control mb-4"
+        placeholder="商品を検索"
+        data-testid="search-input"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      {filteredProducts.length === 0 ? (
+        <p data-testid="no-results">商品が見つかりません</p>
+      ) : (
+        <div className="row g-4">
+          {filteredProducts.map((p) => (
+            <div key={p.id} className="col-12 col-md-4 d-flex">
+              <ProductCard product={p} onAdd={() => handleAddToCart(p)} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
