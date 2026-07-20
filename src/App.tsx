@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
+import OrderHistory from "./pages/OrderHistory";
 import RequireAuth from "./components/RequireAuth";
 import Navbar from "./components/Navbar";
 
@@ -41,6 +42,15 @@ function Layout() {
           element={
             <RequireAuth>
               <ProductDetail />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/orders"
+          element={
+            <RequireAuth>
+              <OrderHistory />
             </RequireAuth>
           }
         />

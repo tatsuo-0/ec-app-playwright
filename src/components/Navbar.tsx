@@ -23,6 +23,10 @@ export default function Navbar() {
           Cart
         </Link>
 
+        <Link className="btn btn-outline-light btn-sm" to="/orders">
+          Orders
+        </Link>
+
         <button
           className="btn btn-warning btn-sm"
           onClick={logout}
